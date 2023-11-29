@@ -17,13 +17,7 @@ let flipped;
     const frame = await fs.readFile(path.join(framesPath, file));
     return frame.toString();
   }));
-  flipped = original.map(f => {
-    return f
-      .toString()
-      .split('')
-      .reverse()
-      .join('')
-  })
+  flipped = original;
 })().catch((err) => {
   console.log('Error loading frames');
   console.log(err);
@@ -64,7 +58,7 @@ const streamer = (stream, opts) => {
     stream.push(colors[colorsOptions[newColor]](frames[index]));
 
     index = (index + 1) % frames.length;
-  }, 70);
+  }, 50);
 };
 
 const validateQuery = ({ flip }) => ({
@@ -82,7 +76,7 @@ const server = http.createServer((req, res) => {
     req.headers['user-agent'] &&
     !req.headers['user-agent'].includes('curl')
   ) {
-    res.writeHead(302, { Location: 'https://github.com/hugomd/parrot.live' });
+    res.writeHead(302, { Location: 'https://www.google.com' });
     return res.end();
   }
 
